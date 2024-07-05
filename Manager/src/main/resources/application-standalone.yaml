@@ -1,0 +1,17 @@
+users:
+  service:
+    list:
+      uri: "http://192.168.1.60:8081"
+    username: Superuser
+    password: admin
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+  flyway:
+    schemas:
+      - user_management

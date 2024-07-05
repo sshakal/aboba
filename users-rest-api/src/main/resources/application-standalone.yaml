@@ -1,0 +1,24 @@
+spring:
+  security:
+    user:
+      name: Superuser
+      password: admin
+      roles:
+        - ADMIN
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+  jpa:
+    show-sql: true
+  flyway:
+    schemas:
+      - public
+      - list
+
+server:
+  port: 8081
+
+logging:
+  level:
+    sql: info

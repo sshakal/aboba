@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="get" data-th-action="@{/users/list}">
+    <label>Фильтр: <input type="text" name="name" data-th-value="${name}">
+
+        <button type="submit">Поиск</button>
+
+    </Label>
+
+</form>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+    </tr>
+    <tr data-th-each="user:${users}">
+        <td data-th-text="${user.getId()}"></td>
+        <td data-th-text="${user.getName()}"></td>
+        <td data-th-text="${user.getAge()}"></td>
+        <td data-th-text="${user.getEmail()}"></td>
+        <td>
+            <a data-th-href="@{/users/{id}(id=${user.getId()})}">
+                <input type="button" value="Info">
+            </a>
+        </td>
+    </tr>
+</table>
+<a data-th-href="@{/users/new}">
+    <input type="button" value="Create new User">
+</a>
+</body>
+</html>

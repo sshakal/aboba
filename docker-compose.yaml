@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  manager-backend:
+    image: manager:0.0.1
+    build:
+      context: ./Manager
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - service-db
+    environment:
+      - SERVER_PORT=8080
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/postgres
+  restapi-backend:
+    image: restapi:0.0.1
+    build:
+      context: ./users-rest-api
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    depends_on:
+      - service-db
+    environment:
+      - SERVER_PORT= 8081
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/postgres
+
+  service-db:
+    image: postgres:14.7-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4:7
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+
+volumes:
+  db-data:
+  pgadmin-data:

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new User</title>
+</head>
+<body>
+<h1>Create new User </h1>
+<div data-th-if="${errors}">
+    <h1> You have an errors</h1>
+    <ul>
+        <li data-th-each="error:${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+<form method="post" data-th-action="@{/users/new}">
+    <label>Name</label><br>
+    <input type="text" name="name" data-th-value="${payload?.name}"><br>
+    <label>Email</label><br>
+    <input type="text" name="email" data-th-value="${payload?.email}"><br>
+    <label>Age</label><br>
+    <input type="text" name="age" data-th-value="${payload?.age}"><br>
+    <input type="submit">
+</form>
+</body>
+</html>

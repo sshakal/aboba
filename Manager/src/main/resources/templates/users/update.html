@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update new User</title>
+</head>
+<body>
+<h1>Update user [[${user.name}]]</h1>
+<div data-th-if="${errors}">
+    <h1> You have an errors</h1>
+    <ul>
+        <li data-th-each="error:${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
+<form method="post" data-th-action="@{/users/{userId}/update(userId=${user.id})}">
+    <label>Name</label><br>
+    <input type="text" name="name" data-th-value="${payload != null ? payload.name : user.name}"><br>
+    <label>Email</label><br>
+    <input type="text" name="email" data-th-value="${payload != null ? payload.email : user.email}"><br>
+    <label>Age</label><br>
+    <input type="number" name="age" data-th-value="${payload != null ? payload.age : user.age}"><br>
+    <input type="submit">
+</form>
+</body>
+</html>
